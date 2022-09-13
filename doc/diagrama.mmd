@@ -11,9 +11,10 @@ classDiagram
     BaseEntidad <|-- Usuario
 
     class BaseEntidad
-    BaseEntidad: +Id
-    BaseEntidad: +Nombre
-    BaseEntidad: +Habilitado
+    <<abstract>> BaseEntidad
+    BaseEntidad: #Id
+    BaseEntidad: #Nombre
+    BaseEntidad: #Habilitado
 
     class Usuario
     Usuario: +Contraseña
