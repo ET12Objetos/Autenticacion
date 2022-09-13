@@ -7,11 +7,16 @@ classDiagram
     Rol o-- Usuario
     Usuario o-- Rol
 
+    BaseEntidad <|-- Rol
+    BaseEntidad <|-- Usuario
+
+    class BaseEntidad
+    BaseEntidad: +Id
+    BaseEntidad: +Nombre
+    BaseEntidad: +Habilitado
+
     class Usuario
-    Usuario: +Id
-    Usuario: +Nombre
     Usuario: +Contraseña
-    Usuario: +Habilitado
     Usuario: +Roles
 
     class Empleado
@@ -23,9 +28,6 @@ classDiagram
     Empleado: +Usuario
 
     class Rol
-    Rol: +Id
-    Rol: +Nombre
-    Rol: +Habilitado
     Rol: +Usuarios
 
     class Empresa
