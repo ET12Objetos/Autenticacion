@@ -1,0 +1,34 @@
+classDiagram
+    Empleado o-- Usuario
+    Empresa o-- Rol
+    Empresa o-- Empleado
+    Empresa o-- Usuario
+
+    Rol o-- Usuario
+    Usuario o-- Rol
+
+    class Usuario
+    Usuario: +Id
+    Usuario: +Nombre
+    Usuario: +Contraseña
+    Usuario: +Habilitado
+    Usuario: +Roles
+
+    class Empleado
+    Empleado: +Id
+    Empleado: +Nombre
+    Empleado: +Apellido
+    Empleado: +Email
+    Empleado: +Habilitado
+    Empleado: +Usuario
+
+    class Rol
+    Rol: +Id
+    Rol: +Nombre
+    Rol: +Habilitado
+    Rol: +Usuarios
+
+    class Empresa
+    Empresa: +Empleados
+    Empresa: +Roles
+    Empresa: +Usuarios

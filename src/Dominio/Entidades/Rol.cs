@@ -2,10 +2,10 @@ namespace Dominio.Entidades;
 
 public class Rol
 {
-    public Guid Id { get; set; }
-    public string Nombre { get; set; }
-    public bool Habilitado { get; set; } = false;
-    public List<Usuario> Usuarios { get; set; }
+    public Guid Id { get; private set; }
+    public string Nombre { get; private set; }
+    public bool Habilitado { get; private set; } = false;
+    public List<Usuario> Usuarios { get; private set; }
 
     public Rol(string nombre)
     {
