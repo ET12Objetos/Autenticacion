@@ -11,4 +11,26 @@ public class Rol : BaseEntidad
     }
 
     public void SetNombre(string nombre) => this.Nombre = nombre;
+
+    public void Habilitar()
+    {
+        //if (Habilitado == false)
+        if (!Habilitado)
+            Habilitado = true;
+        else
+            throw new Exception($"El rol ya se encuentra habilitado");
+    }
+
+    public void Deshabilitar()
+    {
+        if (Habilitado)
+            Habilitado = false;
+        else
+            throw new Exception($"El rol no se encuentra habilitado");
+    }
+
+    public void Actualizar(Rol rol)
+    {
+        this.Nombre = rol.Nombre;
+    }
 }

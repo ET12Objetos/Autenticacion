@@ -11,4 +11,31 @@ public class Usuario : BaseEntidad
         this.Contraseña = contraseña;
         this.Roles = new List<Rol>();
     }
+
+    public void AsignarUn(Rol rol) => Roles.Add(rol);
+
+    public void DesasignarRol(Rol rol) => Roles.Remove(rol);
+
+    public void Habilitar()
+    {
+        //if (Habilitado == false)
+        if (!Habilitado)
+            Habilitado = true;
+        else
+            throw new Exception($"El usuario ya se encuentra habilitado");
+    }
+
+    public void Deshabilitar()
+    {
+        if (Habilitado)
+            Habilitado = false;
+        else
+            throw new Exception($"El usuario no se encuentra habilitado");
+    }
+
+    public void Actualizar(Usuario usuario)
+    {
+        this.Nombre = usuario.Nombre;
+        this.Contraseña = usuario.Contraseña;
+    }
 }

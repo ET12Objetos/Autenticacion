@@ -58,6 +58,17 @@ public class Empresa : IEmpresa
 
     public bool Login(string usuario, string contraseña, string rol)
     {
+        if (!Usuarios.Any(x => x.Nombre == usuario && x.Contraseña == contraseña))
+            throw new Exception("El usuario y/o contraseña son incorrectos");
+
+        if (!Usuarios.Any(x => x.Nombre == usuario && x.Habilitado))
+            throw new Exception("El usuario no esta habilitado");
+
+        var usuarioActual = Usuarios.SingleOrDefault(x => x.Nombre == usuario);
+
+        if (usuarioActual is not null && !usuarioActual.Roles.Any(x => x.Nombre == rol))
+            throw new Exception($"El usuario no posee el rol {rol}");
+
         return true;
     }
 
@@ -69,7 +80,7 @@ public class Empresa : IEmpresa
             throw new Exception($"No existe rol con Id {id}");
 
         //rol.Nombre = nombre; no se puede realizar pues "nombre" es privado
-        rolActual.SetNombre(rol.Nombre);
+        rolActual.Actualizar(rol);
     }
 
     public void ActualizarEmpleado(Guid id, Empleado empleado)
@@ -91,6 +102,22 @@ public class Empresa : IEmpresa
             throw new Exception($"No existe rol con Id {id}");
 
         //rol.Nombre = nombre; no se puede realizar pues "nombre" es privado
-        //usuarioActual.SetNombre(usuario.Nombre);
+        usuarioActual.Actualizar(usuario);
+    }
+
+    public void AsignarRol(Usuario usuario, Rol rol)
+    {
+        if (Roles.Any(x => x.Nombre == rol.Nombre))
+            usuario.AsignarUn(rol);
+        else
+            throw new Exception($"El rol {rol.Nombre} no existe");
+    }
+
+    public void DesasignarRol(Usuario usuario, Rol rol)
+    {
+        if (usuario.Roles.Any(x => x.Nombre == rol.Nombre))
+            usuario.DesasignarRol(rol);
+        else
+            throw new Exception($"El rol {rol.Nombre} no esta asociado al usuario");
     }
 }
