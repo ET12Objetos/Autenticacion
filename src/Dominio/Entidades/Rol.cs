@@ -10,8 +10,6 @@ public class Rol : BaseEntidad
         this.Usuarios = new List<Usuario>();
     }
 
-    public void SetNombre(string nombre) => this.Nombre = nombre;
-
     public void Habilitar()
     {
         //if (Habilitado == false)
