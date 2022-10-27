@@ -22,7 +22,7 @@ public class UsuarioController : ControllerBase
         return Ok(usuarios);
     }
 
-    [HttpGet]
+    [HttpGet("{id:Guid}")]
     public ActionResult Get(Guid id)
     {
         var usuario = contexto.Usuarios.FirstOrDefault(x => x.Id == id);
