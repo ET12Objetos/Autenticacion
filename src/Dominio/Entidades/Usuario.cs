@@ -1,7 +1,12 @@
-﻿namespace Dominio.Entidades;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Dominio.Entidades;
+
+[Table("Usuario")]
 public class Usuario : BaseEntidad
 {
+    [Required]
     public string Contraseña { get; private set; }
     public List<Rol> Roles { get; private set; }
 

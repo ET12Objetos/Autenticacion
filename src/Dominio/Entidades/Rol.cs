@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Dominio.Entidades;
 
+[Table("Rol")]
 public class Rol : BaseEntidad
 {
     public List<Usuario> Usuarios { get; private set; }
