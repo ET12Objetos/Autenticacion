@@ -29,4 +29,16 @@ public class Empleado
         this.Apellido = apellido;
         this.Email = email;
     }
+
+    public void Actualizar(string nombre, string apellido, string email)
+    {
+        this.Nombre = nombre;
+        this.Apellido = apellido;
+        this.Email = email;
+    }
+
+    public void AsignarUn(Usuario usuario)
+    {
+        this.Usuario = usuario;
+    }
 }

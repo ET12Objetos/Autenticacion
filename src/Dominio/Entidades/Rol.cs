@@ -30,8 +30,13 @@ public class Rol : BaseEntidad
             throw new Exception($"El rol no se encuentra habilitado");
     }
 
-    public void Actualizar(Rol rol)
+    public void Actualizar(string nombre)
     {
-        this.Nombre = rol.Nombre;
+        this.Nombre = nombre;
+    }
+
+    public void AsignarA(Usuario usuario)
+    {
+        this.Usuarios.Add(usuario);
     }
 }

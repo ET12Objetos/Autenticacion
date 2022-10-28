@@ -10,7 +10,7 @@ public abstract class BaseEntidad
 
     [StringLength(50)]
     [Required]
-    public string Nombre { get; set; }
+    public string Nombre { get; protected set; }
     public bool Habilitado { get; protected set; } = false;
 
     public BaseEntidad(string nombre)

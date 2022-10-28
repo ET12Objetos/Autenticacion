@@ -53,7 +53,7 @@ public class UsuarioTests
         var usuarioConCambios = new Usuario("nuevoUsuario", "god");
 
         // When
-        usuario.Actualizar(usuarioConCambios);
+        usuario.Actualizar(usuarioConCambios.Nombre, usuarioConCambios.Contraseña);
 
         // Then
         Assert.Equal(usuario.Nombre, usuarioConCambios.Nombre);

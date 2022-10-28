@@ -35,21 +35,19 @@ public class UsuarioController : ControllerBase
         return Ok(nuevoUsuario);
     }
 
-    [HttpPut]
+    [HttpPut("{id:Guid}")]
     public ActionResult Put([FromBody] UsuarioViewModel usuario, Guid id)
     {
         var usuarioConCambios = context.Usuarios.FirstOrDefault(x => x.Id == id);
 
-        usuarioConCambios.Nombre = usuario.Nombre;
-
-        usuarioConCambios.Contraseña = usuario.Contraseña;
+        usuarioConCambios.Actualizar(usuario.Nombre, usuario.Contraseña);
 
         context.SaveChanges();
 
         return Ok(usuarioConCambios);
     }
 
-    [HttpDelete]
+    [HttpDelete("{id:Guid}")]
     public ActionResult Delete(Guid id)
     {
         var usuarioABorrar = context.Usuarios.FirstOrDefault(x => x.Id == id);
@@ -62,10 +60,10 @@ public class UsuarioController : ControllerBase
     }
 
     [HttpPost]
-    [Route("{idUsuario}/Rol/{idRol}")]
-    public ActionResult AsignarRol(Guid idUsuario, Guid idRol)
+    [Route("{id}/Rol/{idRol}")]
+    public ActionResult AsignarRol(Guid id, Guid idRol)
     {
-        var usuario = context.Usuarios.FirstOrDefault(x => x.Id == idUsuario);
+        var usuario = context.Usuarios.FirstOrDefault(x => x.Id == id);
 
         var rol = context.Roles.FirstOrDefault(x => x.Id == idRol);
 
@@ -75,5 +73,4 @@ public class UsuarioController : ControllerBase
 
         return Ok();
     }
-
 }

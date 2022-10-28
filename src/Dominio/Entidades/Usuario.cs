@@ -8,7 +8,7 @@ public class Usuario : BaseEntidad
 {
     [StringLength(50)]
     [Required]
-    public string Contraseña { get; set; }
+    public string Contraseña { get; private set; }
     public List<Rol> Roles { get; private set; }
 
     public Usuario(string nombre, string contraseña)
@@ -39,9 +39,9 @@ public class Usuario : BaseEntidad
             throw new Exception($"El usuario no se encuentra habilitado");
     }
 
-    public void Actualizar(Usuario usuario)
+    public void Actualizar(string nombre, string contraseña)
     {
-        this.Nombre = usuario.Nombre;
-        this.Contraseña = usuario.Contraseña;
+        this.Nombre = nombre;
+        this.Contraseña = contraseña;
     }
 }

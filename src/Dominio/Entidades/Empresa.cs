@@ -80,7 +80,7 @@ public class Empresa : IEmpresa
             throw new Exception($"No existe rol con Id {id}");
 
         //rol.Nombre = nombre; no se puede realizar pues "nombre" es privado
-        rolActual.Actualizar(rol);
+        rolActual.Actualizar(rol.Nombre);
     }
 
     public void ActualizarEmpleado(Guid id, Empleado empleado)
@@ -102,7 +102,7 @@ public class Empresa : IEmpresa
             throw new Exception($"No existe rol con Id {id}");
 
         //rol.Nombre = nombre; no se puede realizar pues "nombre" es privado
-        usuarioActual.Actualizar(usuario);
+        usuarioActual.Actualizar(usuario.Nombre, usuario.Contraseña);
     }
 
     public void AsignarRol(Usuario usuario, Rol rol)
