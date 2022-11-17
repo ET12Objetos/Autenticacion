@@ -1,4 +1,4 @@
-using Aplicacion.Properties;
+using Aplicacion.Persistencia;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

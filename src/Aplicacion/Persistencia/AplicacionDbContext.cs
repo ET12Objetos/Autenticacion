@@ -1,7 +1,7 @@
 using Dominio.Entidades;
 using Microsoft.EntityFrameworkCore;
 
-namespace Aplicacion.Properties;
+namespace Aplicacion.Persistencia;
 public class AplicacionDbContext : DbContext
 {
     public AplicacionDbContext(DbContextOptions<AplicacionDbContext> opciones)

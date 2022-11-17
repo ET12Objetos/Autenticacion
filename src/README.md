@@ -17,15 +17,15 @@ dotnet new webapi -o Aplicacion
 - Con los siguientes comandos:
 
 ```
-dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore --version 6.0.11
 ```
 
 ```
-dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 6.0.11
 ```
 
 ```
-dotnet add package Microsoft.EntityFrameworkCore.Tools
+dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0.11
 ```
 
 ```
@@ -69,19 +69,19 @@ El archivo **appsettings.json** queda:
 
 ## Contexto (DbContext)
 
-- Crear un directorio con el nombre **Persistencia** dentro del proyecto **Aplicacion**
-- Dentro del directorio **Persistencia** crear una clase con el nombre **ApllicacionDbContext**
-- Escribir contenido del archivo **AplicacionDbContext.cs**:
-  - Método constructor
-  - Listas (tablas)
+Crear un directorio con el nombre **Persistencia** dentro del proyecto **Aplicacion**
+
+Dentro del directorio **Persistencia** crear una clase con el nombre **ApllicacionDbContext**
+
+Escribir contenido del archivo **AplicacionDbContext.cs** (ver ejemplo en  _Aplicacion/Persistencia_)
 
 ## Anotaciones (Data Annotations Attributes)
 
-- Para cada una de la entidades del dominio **relevantes** agregar las anotaciones necesarias para explicitar el comportamiento del atributo en la base de datos.
+Para cada una de la entidades del dominio **relevantes** agregar las anotaciones necesarias para explicitar el comportamiento del atributo en la base de datos.
 
 Aqui es donde se explita que atributo sera **Primary Key**, **Foreign Key**, su tipo de dato especifico, nombre de la tabla, nombre de la columna (atributo), si es NULL, etc.  
 
-- Aclaracion: **Warning cs8618** agregar en el archivo **Aplicacion.csproj** lo siguiente:
+Aclaracion: **Warning cs8618** agregar en el archivo **Aplicacion.csproj** lo siguiente:
 
 ```xml
 <NoWarn>8618</NoWarn>
@@ -100,7 +100,7 @@ Quedando:
 
 ## Configuración
 
-- En el archivo **Program.cs** se debe indicar que nuestro contexto se debe asociar con la base de datos MySql para ello se debe colocar el siguiente codigo:
+En el archivo **Program.cs** se debe indicar que nuestro contexto se debe asociar con la base de datos MySql para ello se debe colocar el siguiente codigo:
 
 ```c#
 //obtengo el connectionString desde el archivo appsettings.json
@@ -137,7 +137,7 @@ contexto.Database.EnsureCreated();
 
 # Migraciones (Migrations)
 
-- Para crear la base de datos en MySql se debe traducir desde nuestro contexto (C#) a SQL, para ello debemos realizar una migracion. Esto se debe realizar una unica vez al momento de crear la base de datos. 
+Para crear la base de datos en MySql se debe traducir desde nuestro contexto (C#) a SQL, para ello debemos realizar una migracion. Esto se debe realizar una unica vez al momento de crear la base de datos. 
 
 ```
 dotnet ef migrations add NOMBRE_MIGRACION --context NOMBRE_CONTEXTO --output-dir DIRECTORIO_MIGRACIONES --project NOMBRE_PROYECTO --startup-project NOMBRE_PROYECTO_EJECUTABLE
@@ -149,7 +149,7 @@ Ejemplo:
 dotnet ef migrations add MigracionInicial --context AplicacionDbContext --output-dir Persistencia/Migraciones --project Aplicacion --startup-project Aplicacion
 ```
 
-- Cada vez que ingresemos un nuevo cambio en el contexto. Por ejemplo agregar un nuevo atributo a una entidad. Se debe realizar una nueva migracion con un nombre distinto a los existentes.
+Cada vez que ingresemos un nuevo cambio en el contexto. Por ejemplo agregar un nuevo atributo a una entidad. Se debe realizar una nueva migracion con un nombre distinto a los existentes.
 
 ```
 dotnet ef migrations add UnNuevoCambio --context AplicacionDbContext --output-dir Persistencia/Migraciones --project Aplicacion --startup-project Aplicacion
@@ -157,9 +157,11 @@ dotnet ef migrations add UnNuevoCambio --context AplicacionDbContext --output-di
 
 # Controladores (Controllers)
 
-- De aqui en mas se debe codificar la logica de acceso a datos desde cada controllador.
-- Se debe crear una clase controlador por cada entidad
-- Por cada controlador debe haber al menos 5 endpoints con las siguientes acciones:
+De aqui en mas se debe codificar la logica de acceso a datos desde cada controllador.
+
+Se debe crear una clase controlador por cada entidad
+
+Por cada controlador debe haber al menos 5 endpoints con las siguientes acciones:
   - Ver Todo
   - Ver un elemento por Id
   - Crear un nuevo elemento

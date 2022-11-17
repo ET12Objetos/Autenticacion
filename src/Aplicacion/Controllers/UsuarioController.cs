@@ -1,4 +1,4 @@
-using Aplicacion.Properties;
+using Aplicacion.Persistencia;
 using Aplicacion.ViewModels;
 using Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;

@@ -1,77 +1,76 @@
-using Aplicacion.Properties;
+using Aplicacion.Persistencia;
 using Aplicacion.ViewModels;
 using Dominio.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Aplicacion.Controllers
+namespace Aplicacion.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class RolController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class RolController : ControllerBase
+    public AplicacionDbContext context { get; }
+    public RolController(AplicacionDbContext context)
     {
-        public AplicacionDbContext context { get; }
-        public RolController(AplicacionDbContext context)
-        {
-            this.context = context;
-        }
+        this.context = context;
+    }
 
-        [HttpGet]
-        public ActionResult Get()
-        {
-            var roles = context.Roles;
+    [HttpGet]
+    public ActionResult Get()
+    {
+        var roles = context.Roles;
 
-            return Ok(roles);
-        }
+        return Ok(roles);
+    }
 
-        [HttpPost]
-        public ActionResult Post([FromBody] RolViewModel rol)
-        {
-            var nuevoRol = new Rol(rol.Nombre);
+    [HttpPost]
+    public ActionResult Post([FromBody] RolViewModel rol)
+    {
+        var nuevoRol = new Rol(rol.Nombre);
 
-            context.Roles.Add(nuevoRol);
+        context.Roles.Add(nuevoRol);
 
-            context.SaveChanges();
+        context.SaveChanges();
 
-            return Ok(nuevoRol);
-        }
+        return Ok(nuevoRol);
+    }
 
-        [HttpPut("{id:Guid}")]
-        public ActionResult Put([FromBody] RolViewModel rol, Guid id)
-        {
-            var rolConCambios = context.Roles.FirstOrDefault(x => x.Id == id);
+    [HttpPut("{id:Guid}")]
+    public ActionResult Put([FromBody] RolViewModel rol, Guid id)
+    {
+        var rolConCambios = context.Roles.FirstOrDefault(x => x.Id == id);
 
-            rolConCambios.Actualizar(rol.Nombre);
+        rolConCambios.Actualizar(rol.Nombre);
 
-            context.SaveChanges();
+        context.SaveChanges();
 
-            return Ok(rolConCambios);
-        }
+        return Ok(rolConCambios);
+    }
 
-        [HttpDelete("{id:Guid}")]
-        public ActionResult Delete(Guid id)
-        {
-            var rolABorrar = context.Roles.FirstOrDefault(x => x.Id == id);
+    [HttpDelete("{id:Guid}")]
+    public ActionResult Delete(Guid id)
+    {
+        var rolABorrar = context.Roles.FirstOrDefault(x => x.Id == id);
 
-            context.Roles.Remove(rolABorrar);
+        context.Roles.Remove(rolABorrar);
 
-            context.SaveChanges();
+        context.SaveChanges();
 
-            return Ok();
-        }
+        return Ok();
+    }
 
-        [HttpPost]
-        [Route("{id}/Usuario/{idUsuario}")]
-        public ActionResult AsignarUsuario(Guid id, Guid idUsuario)
-        {
-            var usuario = context.Usuarios.FirstOrDefault(x => x.Id == idUsuario);
+    [HttpPost]
+    [Route("{id}/Usuario/{idUsuario}")]
+    public ActionResult AsignarUsuario(Guid id, Guid idUsuario)
+    {
+        var usuario = context.Usuarios.FirstOrDefault(x => x.Id == idUsuario);
 
-            var rol = context.Roles.FirstOrDefault(x => x.Id == id);
+        var rol = context.Roles.FirstOrDefault(x => x.Id == id);
 
-            rol.AsignarA(usuario);
+        rol.AsignarA(usuario);
 
-            context.SaveChanges();
+        context.SaveChanges();
 
-            return Ok();
-        }
+        return Ok();
     }
 }
